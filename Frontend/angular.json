@@ -3,9 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "LoanManagementFrontEnd": {
+    "Frontend": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -13,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/loan-management-front-end",
+            "outputPath": "dist/frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -25,13 +35,18 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ]
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/jquery/dist/jquery.min.js"
+            ],
+            "server": "src/main.server.ts",
+            "prerender": true,
+            "ssr": {
+              "entry": "server.ts"
+            }
           },
           "configurations": {
             "production": {
@@ -61,10 +76,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "LoanManagementFrontEnd:build:production"
+              "buildTarget": "Frontend:build:production"
             },
             "development": {
-              "buildTarget": "LoanManagementFrontEnd:build:development"
+              "buildTarget": "Frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -72,7 +87,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "LoanManagementFrontEnd:build"
+            "buildTarget": "Frontend:build"
           }
         },
         "test": {
@@ -97,6 +112,6 @@
     }
   },
   "cli": {
-    "analytics": "cba94214-de75-46c9-9ab7-be5bbf769fcd"
+    "analytics": "dfbc1217-19fb-4508-9339-a23f40ef1f90"
   }
 }
